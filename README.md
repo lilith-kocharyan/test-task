@@ -33,6 +33,19 @@ PostgreSQL
 
 NestJS
 
+## Set up your .env file
+
+DATABASE_HOST=localhost
+DATABASE_PORT=5432
+DATABASE_USER=your-db-username
+DATABASE_PASSWORD=your-db-password
+DATABASE_NAME=your-db-name
+JWT_SECRET=your-jwt-secret
+
+## Create the PostgreSQL database:
+
+Make sure your PostgreSQL instance is running and create a database. You can name it whatever you'd like (e.g., social_network).
+
 ## Project setup
 
 ```bash
@@ -52,40 +65,55 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Deployment
+## Endpoints
 
-This project can be deployed to various platforms, including Heroku, Docker, or any cloud service supporting Node.js and PostgreSQL.
+Authentication
+POST /auth/register
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
+Registers a new user
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Body: { firstName: string, lastName: string, age: number, email: string, password: string }
 
-## Resources
+POST /auth/login
 
-Check out a few resources that may come in handy when working with NestJS:
+Logs in a user and returns a JWT access token
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+Body: { email: string, password: string }
 
-## Support
+Users
+GET /users
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Fetches all users (admin only)
 
-## Stay in touch
+GET /users/search
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Advanced search for users by first name, last name, and age
 
-## License
+Query Params: firstName, lastName, age
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Friends
+POST /friends/:receiverId
+
+Sends a friend request from the authenticated user to the user with ID receiverId
+
+Authorization: Bearer token
+
+PATCH /friends/:requestId
+
+Accepts or declines a friend request
+
+Body: { status: 'accepted' | 'declined' }
+
+Authorization: Bearer token
+
+GET /friends/requests
+
+Fetches incoming friend requests for the authenticated user
+
+Authorization: Bearer token
+
+GET /friends
+
+Fetches the list of friends for the authenticated user
+
+Authorization: Bearer token
