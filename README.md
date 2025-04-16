@@ -65,6 +65,15 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Testing:
+
+Unit Tests
+Run unit tests using:
+
+```bash
+$ npm run test
+```
+
 ## Endpoints
 
 Authentication
