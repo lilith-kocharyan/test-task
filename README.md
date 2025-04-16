@@ -35,12 +35,14 @@ NestJS
 
 ## Set up your .env file
 
+```env
 DATABASE_HOST=localhost
 DATABASE_PORT=5432
 DATABASE_USER=your-db-username
 DATABASE_PASSWORD=your-db-password
 DATABASE_NAME=your-db-name
 JWT_SECRET=your-jwt-secret
+```
 
 ## Create the PostgreSQL database:
 

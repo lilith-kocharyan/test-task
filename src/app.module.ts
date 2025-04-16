@@ -5,7 +5,6 @@ import { DatabaseInitService } from './database/database-init.service';
 import { UsersModule } from './users/users.module';
 import { FriendsModule } from './friends/friends.module';
 import { DatabaseService } from './database/database.service';
-import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -14,7 +13,6 @@ import { AppController } from './app.controller';
     UsersModule,
     FriendsModule,
   ],
-  controllers: [AppController],
   providers: [DatabaseService, DatabaseInitService],
   exports: [DatabaseService],
 })
